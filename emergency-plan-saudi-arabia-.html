@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Plan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl; /* For Arabic layout, switch to ltr for English */
+        }
+        table {
+            width: 60%;
+            margin: 50px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 2px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: hsl(118, 68%, 91%);
+        }
+        .button-container {
+            text-align: center;
+            margin: 20px;
+            background-color: hsl(118, 68%, 91%) ;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<table>
+    <thead>
+        <tr>
+            <th>خطة البقاء في السعودية و الاكتفاء الذاتي بدون عمل مع تجارة السيارات و التدريس اون لاين</th>
+            <th>Plan for Self-Sufficiency in Saudi Arabia without Work, Including Car Trading and Online Teaching</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>12000</td>
+            <td>Housing Cost</td>
+        </tr>
+        <tr>
+            <td>12000</td>
+            <td>Food Cost</td>
+        </tr>
+        <tr>
+            <td>21600</td>
+            <td>Online Teaching Income (6 hours per day for a full year)</td>
+        </tr>
+        <tr>
+            <td>24000</td>
+            <td>Total Expenses</td>
+        </tr>
+        <tr>
+            <td>-2400</td>
+            <td>Deficit</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="button-container">
+    <button onclick="copyTable()">Copy Table</button>
+    <button onclick="printTable()">Print Table</button>
+</div>
+
+<script>
+    function copyTable() {
+        const range = document.createRange();
+        range.selectNode(document.querySelector('table'));
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+
+        try {
+            const successful = document.execCommand('copy');
+            const msg = successful ? 'successful' : 'unsuccessful';
+            alert('Copy table command was ' + msg);
+        } catch (err) {
+            console.error('Unable to copy', err);
+        }
+
+        window.getSelection().removeAllRanges();
+    }
+
+    function printTable() {
+        const printContents = document.querySelector('table').outerHTML;
+        const originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+        location.reload(); // Reload to restore event listeners
+    }
+</script>
+
+</body>
+</html>
